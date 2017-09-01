@@ -23,13 +23,13 @@ def homepage():
 	data = preprocess_data(data)
 	
 	df = pd.DataFrame.from_dict({'Message':[data]})
-	print df
+	print (df)
 	
 	vect = pd.read_pickle('vect.dat')#load(file('vect.dat'))
 	model = pd.read_pickle('model.dat')#load(file('model.dat'))
 	
-	result = model.predict(vect.transform(df))
-	print result
+	result = int(model.predict(vect.transform(df).toarray())[0])
+	print (result)
 	
 	return jsonify(spam = result, success = 1)
 
