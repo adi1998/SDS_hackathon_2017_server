@@ -1,11 +1,14 @@
-from flask import Flask, jsonify
+from flask import *
 from datetime import datetime
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/',methods = ['GET', 'POST'])
 def homepage():
+	data = request.args.get('data')
+	#data = preprocess_data(data)
+	result = 0 # get from trained model
     return jsonify(
-        spam = "1"
+        spam = result
     )
 
 if __name__ == '__main__':
