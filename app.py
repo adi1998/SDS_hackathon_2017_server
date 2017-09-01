@@ -4,12 +4,15 @@ app = Flask(__name__)
 
 @app.route('/',methods = ['GET', 'POST'])
 def homepage():
-	try:
-		data = request.args.get('data')
-	except:
+	data = request.args.get('data')
+	if not data:
 		return jsonify(success = 0)
+
 	#data = preprocess_data(data)
-	result = 0 # get from trained model
+
+	# get from trained model
+	result = 0 
+	
 	return jsonify(spam = result, success = 1)
 
 if __name__ == '__main__':
