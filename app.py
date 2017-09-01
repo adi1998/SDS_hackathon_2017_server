@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    return "lul"
+    return "finally working :)"
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
