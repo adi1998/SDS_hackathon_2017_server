@@ -22,11 +22,11 @@ def homepage():
 
 	data = preprocess_data(data)
 	
-	df = pd.DataFrame({'Message':data})
+	df = pd.DataFrame.from_dict({'Message':[data]})
 	print df
 	
-	vect = load(file('vect.dat'))
-	model = load(file('model.dat'))
+	vect = pd.read_pickle('vect.dat')#load(file('vect.dat'))
+	model = pd.read_pickle('model.dat')#load(file('model.dat'))
 	
 	result = model.predict(vect.transform(df))
 	print result
