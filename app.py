@@ -1,6 +1,6 @@
 from flask import *
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB , 
+from sklearn.naive_bayes import MultinomialNB , GaussianNB
 from pickle import load
 
 import pandas as pd
