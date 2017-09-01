@@ -5,14 +5,15 @@ from pickle import load
 
 import pandas as pd
 import numpy as np
+import re
 
 
 app = Flask(__name__)
 
 def preprocess_data(data):
-	data = data.replace('\d+',' ')
-	data = data.replace('[^a-zA-Z0-9 \n]', ' ')
-	return data
+	data = re.sub('\d+',' ',data)
+	data = re.sub('[^a-zA-Z0-9 \n]', ' ',data)
+	return data.lower()
 
 @app.route('/',methods = ['GET', 'POST'])
 def homepage():
