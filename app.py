@@ -13,7 +13,7 @@ app = Flask(__name__)
 def preprocess_data(data):
 	data = re.sub('\d+',' ',data)
 	data = re.sub('[^a-zA-Z0-9 \n]', ' ',data)
-	return data.lower()
+	return ' '.join(data.lower().split())
 
 @app.route('/',methods = ['GET', 'POST'])
 def homepage():
@@ -23,14 +23,11 @@ def homepage():
 
 	data = preprocess_data(data)
 	
-	df = pd.DataFrame.from_dict({'Message':[data]})
-	print (df)
+	df = pd.DataFrame.from_dict({'Message':[data]})["Message"]
 	
-	vect = pd.read_pickle('vect.dat')#load(file('vect.dat'))
-	model = pd.read_pickle('model.dat')#load(file('model.dat'))
-	
-	result = int(model.predict(vect.transform(df).toarray())[0])
-	print (result)
+	vect = load(file('vect.dat'))
+	model = load(file('model.dat'))
+	result = int(model.predict(vect.transform(df).toarray()))
 	
 	return jsonify(spam = result, success = 1)
 
