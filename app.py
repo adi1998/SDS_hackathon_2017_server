@@ -1,7 +1,8 @@
 from flask import *
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import  GaussianNB
-from pickle import load
+from sklearn.externals import joblib
+
 
 import pandas as pd
 import numpy as np
@@ -26,8 +27,9 @@ def homepage():
 	df = pd.DataFrame.from_dict({'Message':[data]})["Message"]
 	
 	
-	vect = load(file('vect.dat'))
-	model = load(file('model.dat'))
+	
+	model = joblib.load("model.dat")
+	vect = joblib.load("vect.dat")
 	print (vect.transform(df).toarray())
 	result = int(model.predict(vect.transform(df).toarray()))
 	print (result)
