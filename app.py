@@ -28,7 +28,7 @@ def homepage():
 	
 	vect = load(file('vect.dat'))
 	model = load(file('model.dat'))
-	print vect.transform(df).toarray()
+	print (vect.transform(df).toarray())
 	result = int(model.predict(vect.transform(df).toarray()))
 	print (result)
 	
