@@ -15,19 +15,23 @@ def preprocess_data(data):
 	data = re.sub('[^a-zA-Z0-9 \n]', ' ',data)
 	return ' '.join(data.lower().split())
 
-@app.route('/',methods = ['GET', 'POST'])
-def homepage():
+@app.route('/')
+def home():
+	return "API for message classifier"
+
+@app.route('/api',methods = ['GET', 'POST'])
+def api():
 	try:
-		data = request.args.get('data')
+		data = request.form.get('data')
 	except:
 		return jsonify(spam = 1, success = 1)	
 		
 	if not data:
-		return jsonify(success = 0)
+		return jsonify(spam = 0, success = 0)
 
 	data = preprocess_data(data)
 	
-	df = pd.DataFrame.from_dict({'Message':[data]})["Message"]
+	df = pd.DataFrame.from_dict({"Message":[data]})["Message"]
 	
 	model = joblib.load("model.dat")
 	vect = joblib.load("vect.dat")
