@@ -19,7 +19,7 @@ def preprocess_data(data):
 def home():
 	return "API for message classifier"
 
-@app.route('/api',methods = ['GET', 'POST'])
+@app.route('/api/',methods = ['GET', 'POST'])
 def api():
 	try:
 		data = request.form.get('data')
