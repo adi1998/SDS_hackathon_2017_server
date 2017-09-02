@@ -3,7 +3,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import  GaussianNB
 from sklearn.externals import joblib
 
-
 import pandas as pd
 import numpy as np
 import re
@@ -18,15 +17,17 @@ def preprocess_data(data):
 
 @app.route('/',methods = ['GET', 'POST'])
 def homepage():
-	data = request.args.get('data')
+	try:
+		data = request.args.get('data')
+	except:
+		return jsonify(spam = 1, success = 1)	
+		
 	if not data:
 		return jsonify(success = 0)
 
 	data = preprocess_data(data)
 	
 	df = pd.DataFrame.from_dict({'Message':[data]})["Message"]
-	
-	
 	
 	model = joblib.load("model.dat")
 	vect = joblib.load("vect.dat")
