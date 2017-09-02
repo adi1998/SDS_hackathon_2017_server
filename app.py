@@ -25,9 +25,12 @@ def homepage():
 	
 	df = pd.DataFrame.from_dict({'Message':[data]})["Message"]
 	
+	
 	vect = load(file('vect.dat'))
 	model = load(file('model.dat'))
+	print vect.transform(df).toarray()
 	result = int(model.predict(vect.transform(df).toarray()))
+	print (result)
 	
 	return jsonify(spam = result, success = 1)
 
