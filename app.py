@@ -25,7 +25,7 @@ def api():
 	try:
 		data = request.form.get('data')
 	except:
-		return jsonify(spam = 1, success = 1)	
+		return jsonify(spam = 0, success = 0)	
 		
 	if not data:
 		return jsonify(spam = 0, success = 0)
@@ -39,7 +39,6 @@ def api():
 	print (vect.transform(df).toarray())
 	result = int(model.predict(vect.transform(df).toarray()))
 	print (result)
-	
 	return jsonify(spam = result, success = 1)
 
 if __name__ == '__main__':
